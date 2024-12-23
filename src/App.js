@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { StarIcon } from "@heroicons/react/16/solid";
+import { useState } from "react";
 
 function App() {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
+      <h1 className="text-4xl md:text-5xl font-bold text-center text-blue-600 mb-8">
+        Star Ratings
+      </h1>
+      <div className="flex justify-center gap-4">
+        {[1, 2, 3, 4, 5].map((num, index) => (
+          <button
+            key={index}
+            onClick={() => setRating(num)}
+            onMouseOver={() => setHover(num)}
+            onMouseLeave={() => setHover(rating)}
+            className={`transition-colors focus:outline-none ${
+              num <= (hover || rating) ? "text-yellow-500" : "text-gray-400"
+            }`}
+          >
+            <StarIcon className="w-20 h-20" />
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
